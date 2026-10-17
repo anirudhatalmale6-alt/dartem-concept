@@ -20,7 +20,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;font-family:var(--sans);font-size:17px;line-height:1.65;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
 a{color:var(--blue);text-decoration:none}
 a:hover{text-decoration:underline}
 h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--navy);line-height:1.2;margin:0 0 .5em}
@@ -67,8 +67,22 @@ nav.main .btn{padding:11px 20px;color:#fff}
 .hero .lead{color:#c3d1e4;max-width:600px;margin-bottom:34px}
 .hero .actions{display:flex;gap:14px;flex-wrap:wrap}
 .hero .eyebrow{color:#8fbcf0}
-.pixels{position:absolute;right:-40px;top:50%;transform:translateY(-50%);width:520px;height:520px;opacity:.9;pointer-events:none}
-.hero-pillars{display:flex;gap:40px;margin-top:64px;padding-top:30px;border-top:1px solid rgba(255,255,255,.14);max-width:760px;flex-wrap:wrap}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(2.1rem,3.7vw,3.1rem)}
+.hero-media{position:relative;padding:0 0 72px 44px}
+.hm-main{width:100%;aspect-ratio:5/4;object-fit:cover;border-radius:var(--radius);box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.hm-sub{position:absolute;left:0;bottom:0;width:54%;aspect-ratio:3/2;object-fit:cover;border-radius:var(--radius);border:6px solid var(--navy);box-shadow:0 20px 40px -20px rgba(0,0,0,.6)}
+.hm-pixels{position:absolute;right:-30px;top:-34px;width:96px;height:96px}
+.work{padding-top:0}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.tile{position:relative;display:block;border-radius:var(--radius);overflow:hidden;aspect-ratio:3/4;color:#fff;background:var(--navy)}
+.tile:hover{text-decoration:none}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.tile:hover img{transform:scale(1.04)}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,26,61,0) 40%,rgba(0,26,61,.9))}
+.tile-cap{position:absolute;left:20px;right:20px;bottom:18px;z-index:1;font-family:var(--serif);font-size:1.16rem;font-weight:600;line-height:1.3}
+.tile-cap small{display:block;font-family:var(--sans);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#9cc4f0;font-weight:600;margin-bottom:4px}
+.hero-pillars{display:flex;gap:40px;margin-top:48px;padding-top:30px;border-top:1px solid rgba(255,255,255,.14);max-width:760px;flex-wrap:wrap}
 .hero-pillars div{font-size:.95rem}
 .hero-pillars strong{display:block;color:#fff;font-family:var(--serif);font-size:1.15rem;font-weight:600}
 
@@ -121,7 +135,7 @@ nav.main .btn{padding:11px 20px;color:#fff}
 .sample-tag{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:#fff4e0;color:#8a5a00;border-radius:3px;padding:2px 7px;margin-bottom:14px;align-self:flex-start}
 
 /* cta band */
-.band{background:var(--navy);color:#c9d6e8;padding:72px 0}
+.band{background:linear-gradient(90deg,rgba(0,26,61,.95) 0%,rgba(0,46,101,.86) 60%,rgba(0,46,101,.7) 100%),url(img/cta-desk.jpg) center/cover no-repeat var(--navy);color:#c9d6e8;padding:88px 0}
 .band .wrap{display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap}
 .band h2{color:#fff;margin:0 0 6px}
 .band p{margin:0}
@@ -168,7 +182,9 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:48px;padding-
   .about,.contact{gap:44px}
   .quotes{grid-template-columns:1fr}
   footer .cols{grid-template-columns:1fr 1fr}
-  .pixels{opacity:.35}
+  .hero-grid{grid-template-columns:1fr;gap:48px}
+  .hero-media{max-width:620px}
+  .tiles{grid-template-columns:1fr 1fr}
 }
 @media (max-width:600px){
   body{font-size:16px}
@@ -177,7 +193,10 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:48px;padding-
   .topbar .hide-sm{display:none}
   .topbar .wrap{justify-content:center}
   .topbar span+span{margin-left:0}
-  .pixels{display:none}
+  .hero-media{padding:0 0 48px 24px}
+  .hm-pixels{width:64px;height:64px;right:-8px;top:-24px}
+  .tiles{gap:12px}
+  .tile-cap{left:14px;right:14px;bottom:12px;font-size:1rem}
   header.site .wrap{height:72px}
   nav.main{top:72px}
   .brand img{height:52px}
@@ -223,19 +242,8 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:48px;padding-
 
 <main id="top">
   <section class="hero">
-    <svg class="pixels" viewBox="0 0 520 520" aria-hidden="true">
-      <g fill="#0060bd">
-        <rect x="300" y="120" width="34" height="34" opacity=".55"/><rect x="344" y="120" width="34" height="34" opacity=".3"/>
-        <rect x="256" y="164" width="34" height="34" opacity=".35"/><rect x="344" y="164" width="34" height="34" opacity=".7"/><rect x="388" y="164" width="34" height="34" opacity=".4"/>
-        <rect x="300" y="208" width="34" height="34" opacity=".25"/><rect x="388" y="208" width="34" height="34" opacity=".8"/><rect x="432" y="208" width="34" height="34" opacity=".35"/>
-        <rect x="344" y="252" width="34" height="34" opacity=".45"/><rect x="432" y="252" width="34" height="34" opacity=".6"/>
-        <rect x="388" y="296" width="34" height="34" opacity=".3"/><rect x="476" y="296" width="34" height="34" opacity=".5"/>
-        <rect x="432" y="340" width="34" height="34" opacity=".25"/>
-      </g>
-      <path d="M150 470 C 330 470, 470 360, 500 180" fill="none" stroke="#0060bd" stroke-width="2" opacity=".5"/>
-      <circle cx="500" cy="176" r="9" fill="#0060bd" opacity=".8"/>
-    </svg>
-    <div class="wrap" style="position:relative">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
       <span class="eyebrow">IT Consultancy &middot; Healthcare Services</span>
       <h1>Trusted expertise in technology and care, delivered with integrity.</h1>
       <p class="lead">Dartem Consulting Limited helps organisations across Ireland run better IT and deliver safe, person-centred care, with advice and services shaped around their specific needs.</p>
@@ -246,6 +254,12 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:48px;padding-
       <div class="hero-pillars">
         <div><strong>IT Consultancy</strong>Strategy, infrastructure and security</div>
         <div><strong>Healthcare Services</strong>Compassionate, compliant care delivery</div>
+      </div>
+      </div>
+      <div class="hero-media">
+        <svg class="hm-pixels" viewBox="0 0 96 96" aria-hidden="true"><g fill="#0060bd"><rect x="32" y="0" width="22" height="22" opacity=".9"/><rect x="62" y="0" width="22" height="22" opacity=".45"/><rect x="0" y="32" width="22" height="22" opacity=".35"/><rect x="62" y="32" width="22" height="22" opacity=".75"/><rect x="32" y="64" width="22" height="22" opacity=".5"/></g></svg>
+        <img class="hm-main" src="img/hero-it-meeting.jpg" alt="Dartem IT consultants working with a client team" width="1400" height="934" fetchpriority="high">
+        <img class="hm-sub" src="img/hero-home-care.jpg" alt="Healthcare worker caring for a patient at home" width="900" height="600">
       </div>
     </div>
   </section>
@@ -295,6 +309,21 @@ footer .legal{border-top:1px solid rgba(255,255,255,.1);margin-top:48px;padding-
           </ul>
           <a class="btn btn-outline" href="#">All healthcare services</a>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="work" aria-label="Our work in practice">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">In practice</span>
+        <h2>Supporting people and the systems behind them</h2>
+      </div>
+      <div class="tiles">
+        <a class="tile" href="#services"><img src="img/work-staffing.jpg" alt="Healthcare team of doctors and nurses" loading="lazy" width="900" height="600"><span class="tile-cap"><small>Healthcare</small>Healthcare staffing</span></a>
+        <a class="tile" href="#services"><img src="img/work-health-it.jpg" alt="Clinician reviewing patient records on a tablet" loading="lazy" width="900" height="600"><span class="tile-cap"><small>Healthcare</small>Care planning and records</span></a>
+        <a class="tile" href="#services"><img src="img/work-infrastructure.jpg" alt="IT engineer working in a server room" loading="lazy" width="900" height="601"><span class="tile-cap"><small>IT Consultancy</small>Infrastructure and cloud</span></a>
+        <a class="tile" href="#services"><img src="img/work-cyber.jpg" alt="IT technician managing network systems" loading="lazy" width="900" height="601"><span class="tile-cap"><small>IT Consultancy</small>Cybersecurity and support</span></a>
       </div>
     </div>
   </section>
